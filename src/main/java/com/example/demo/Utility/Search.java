@@ -30,7 +30,7 @@ public class Search {
 
     //병원의 정보 리스트를 받는 함수
     public ArrayList<HospitalInfo> getHospitalList(){
-        ArrayList<HospitalInfo> list = new ArrayList<HospitalInfo>;
+        ArrayList<HospitalInfo> list = new ArrayList<HospitalInfo>();
 
         //api로부터 병원 정보 받아서 list에 추가
 
