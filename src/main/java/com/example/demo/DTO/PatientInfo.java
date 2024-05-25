@@ -7,6 +7,19 @@ public class PatientInfo extends UserInfo{
     private String phone;
     private String anamnesis;
 
+    public PatientInfo(int gender, int age, int hypertension, int heartdisease, int everMarried,
+        int workType, double bmi, int smokingStatus, int strokePercent, String name,
+        String birthday,
+        String address, String phone, String anamnesis) {
+        super(gender, age, hypertension, heartdisease, everMarried, workType, bmi, smokingStatus,
+            strokePercent);
+        this.name = name;
+        this.birthday = birthday;
+        this.address = address;
+        this.phone = phone;
+        this.anamnesis = anamnesis;
+    }
+
     public String getName() {
         return name;
     }
