@@ -11,6 +11,19 @@ public class UserInfo {
     private int smokingStatus;
     private int strokePercent;
 
+    public UserInfo(int gender, int age, int hypertension, int heartdisease, int everMarried,
+        int workType, double bmi, int smokingStatus, int strokePercent) {
+        this.gender = gender;
+        this.age = age;
+        this.hypertension = hypertension;
+        this.heartdisease = heartdisease;
+        this.everMarried = everMarried;
+        this.workType = workType;
+        this.bmi = bmi;
+        this.smokingStatus = smokingStatus;
+        this.strokePercent = strokePercent;
+    }
+
     public int getGender() {
         return gender;
     }
