@@ -6,6 +6,13 @@ public class HospitalInfo {
     private String hospitalOpening;
     private String hospitalClosing;
 
+    public HospitalInfo(String address, String hospitalName, String hospitalOpening, String hospitalClosing){
+        this.address = address;
+        this.hospitalName = hospitalName;
+        this.hospitalOpening = hospitalOpening;
+        this.hospitalClosing = hospitalClosing;
+    }
+
     public String getAddress() {
         return address;
     }
