@@ -7,6 +7,8 @@ public class UserInfo {
     private int heartdisease;
     private int everMarried;
     private int workType;
+    private int residenceType = 1;
+    private double avgGlucoseLevel = 106.14;
     private double bmi;
     private int smokingStatus;
     private int strokePercent;
