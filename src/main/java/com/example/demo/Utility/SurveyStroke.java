@@ -1,18 +1,17 @@
 package com.example.demo.Utility;
 
 import com.example.demo.DTO.UserInfo;
-import java.util.ArrayList;
+import org.springframework.web.bind.annotation.*;
+import jakarta.persistence.Entity;
 
+@RestController
+@RequestMapping("/api/SurveyStroke")
 public class SurveyStroke {
     private UserInfo userInfo;
-    public UserInfo startSurvey(){
-        ArrayList<String> labelScore = new ArrayList<>();
 
-
-        //front에서 받아오는 작업
-
-
-        return userInfo;
+    @PostMapping
+    public void startSurvey(@RequestBody UserInfo data) {
+        userInfo = data;
     }
 
     public void updateUserLabel(int score, String label){
