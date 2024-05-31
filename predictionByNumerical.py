@@ -59,22 +59,40 @@ disp = ConfusionMatrixDisplay(confusion_matrix=cm)
 disp.plot()
 plt.show()
 
+'''
 #인코딩된 데이터 확인용
-encoders = {}
+from sklearn.preprocessing import LabelEncoder
 
-for column in df.columns:
-    le = LabelEncoder()
-    df[column] = le.fit_transform(df[column])
-    encoders[column] = le
+# 예시 데이터
+data = {
+    'residence_type': ['Urban', 'Rural', 'Urban', 'Rural'],
+    'gender' : ['Male', 'Female', 'Male', 'Female'],
+    'work_type' : ['Private', 'Govt_job', 'Self_employed', 'children'],
+    'smoking_status' : ['smokes', 'never smoked', 'formerly smoked', 'Unknown']
+}
 
-# 각 카테고리의 인코딩된 값 확인
-print('encoding values\n')
-for column, encoder in encoders.items():
-    print(f'Column: {column}')
-    print('Categories:', list(encoder.classes_))
-    print('Encoded Values:', encoder.transform(encoder.classes_))
-    print()
-    
+df = pd.DataFrame(data)
+
+# LabelEncoder 객체 생성 및 학습
+encoder = LabelEncoder()
+df['residence_type_encoded'] = encoder.fit_transform(df['residence_type'])
+df['gender_encoded'] = encoder.fit_transform(df['gender'])
+df['work_type_encoded'] = encoder.fit_transform(df['work_type'])
+df['smoking_status_encoded'] = encoder.fit_transform(df['smoking_status'])
+
+# 인코딩 결과 확인
+print(df)
+
+# 범주가 어떻게 인코딩되었는지 확인
+classes = encoder.classes_
+print("Classes:", classes)
+
+# "Urban"이 인코딩된 값 찾기
+urban_index = encoder.transform(['Urban'])[0]
+gender_index = encoder.transform(['Male'])[0]
+#work_index = encoder.transform([''])
+'''
+
 # 모델 저장
 from joblib import dump, load
 dump(rf, 'stroke_model.pkl')
