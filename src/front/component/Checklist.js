@@ -1,9 +1,15 @@
-import { Component } from "./Core";
+import { Component } from "./Core"
 
 export default class Checklist extends Component {
   render() {
     this.el.innerHTML = /* html */ `
-    <h1>뇌졸중 자가 진단 체크 리스트</h1>
+    <h1>🏥 뇌졸중 자가 진단 체크 리스트</h1>
+    <input type="text" class="textBox" placeholder="이름"  />
+    <input type="text" class="textBox" placeholder="나이"  />
+    <select class="select">
+      <option>남</option>
+      <option>여</option>
+    </select>
     <h2>✅ 최근 3개월 동안 자신에게 해당되는 증상을 체크해 주세요</h2>
       <ul>
         <li>
@@ -44,12 +50,29 @@ export default class Checklist extends Component {
         </li>
       </ul>
       <button type="submit">제출</button>
-    `;
+    `
 
-    const inputEl = this.el.querySelector("button");
+    const inputEl = this.el.querySelector("button")
     inputEl.addEventListener("click", (e) => {
-      e.preventDefault();
-      window.location.hash = "#result";
-    });
+      e.preventDefault()
+      const formData = {
+        name: "",
+        age: "",
+        gender: "",
+        symptoms: [],
+      }
+      formData.name = this.el.querySelector('input[type="text"][placeholder="이름"]').value
+      formData.age = this.el.querySelector('input[type="text"][placeholder="나이"]').value
+      formData.gender = this.el.querySelector(".select").value
+      const checkedSymptoms = this.el.querySelectorAll('input[type="checkbox"]:checked')
+      checkedSymptoms.forEach((checkbox) => {
+        formData.symptoms.push(checkbox.value)
+      })
+      const jsonFormData = JSON.stringify(formData)
+      console.log(jsonFormData)
+      localStorage.setItem("formData", JSON.stringify(formData))
+
+      window.location.hash = "#result"
+    })
   }
 }
