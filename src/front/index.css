@@ -15,6 +15,28 @@ body {
   position: relative;
 }
 
+.select {
+  width: 200px;
+  height: 44px;
+  border-radius: 10px;
+  background-color: white;
+  padding: 10px;
+  position: relative;
+  margin-top: 20px;
+  border: 1px solid grey;
+  margin-bottom: 30px;
+}
+
+.textBox {
+  width: 50px;
+  height: 0px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  position: relative;
+  border: 1px solid grey;
+}
+
 .tasks {
   margin-top: 20px;
 }
@@ -28,4 +50,18 @@ button {
   cursor: pointer;
   position: absolute;
   left: 48%;
+}
+
+button.reset {
+  margin-top: 20px;
+  left: 42%;
+}
+
+button.reserve {
+  margin-top: 20px;
+  left: 51%;
+}
+
+button.come {
+  margin-top: 100px;
 }
