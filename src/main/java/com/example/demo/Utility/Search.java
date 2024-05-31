@@ -7,17 +7,18 @@ import java.util.ArrayList;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import org.json.JSONObject;
 
 public class Search {
     private HospitalInfo hospitalInfo;
@@ -113,7 +114,50 @@ public class Search {
     }
 
     public String getUserGps(){
-        String gpsInfo = "";
-        return gpsInfo;
+        try {
+            // 외부 API URL 설정
+            String apiUrl = "https://ipinfo.io/json";
+
+            // URL 객체 생성
+            URL url = new URL(apiUrl);
+
+            // HTTP 연결 객체 생성
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            // GET 요청 설정
+            connection.setRequestMethod("GET");
+
+            // 응답 코드 확인
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                // 응답을 BufferedReader로 읽기
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String inputLine;
+                StringBuilder response = new StringBuilder();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+
+                // 응답 JSON 데이터를 문자열로 가져오기
+                String jsonResponse = response.toString();
+
+                // JSON 데이터를 파싱
+                JSONObject jsonObject = new JSONObject(jsonResponse);
+
+                // 위치 정보 추출
+                String city = jsonObject.getString("city");
+                if(city.equals("Daegu")) city = "대구";
+
+                return city;
+            } else {
+                System.out.println("GET 요청 실패: 응답 코드 " + responseCode);
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
