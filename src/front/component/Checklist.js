@@ -4,49 +4,48 @@ export default class Checklist extends Component {
   render() {
     this.el.innerHTML = /* html */ `
     <h1>🏥 뇌졸중 자가 진단 체크 리스트</h1>
-    <input type="text" class="textBox" placeholder="이름"  />
     <input type="text" class="textBox" placeholder="나이"  />
-    <select class="select">
-      <option>남</option>
+    <input type="text" class="textBox" placeholder="BMI"  />
+    <select class="select" id="gender">
       <option>여</option>
+      <option>남</option>
     </select>
-    <h2>✅ 최근 3개월 동안 자신에게 해당되는 증상을 체크해 주세요</h2>
+    
+    <h2>✅ 자신에게 해당되는 증상을 체크해 주세요</h2>
       <ul>
         <li>
+          <select class="select1" id="job">
+          <option>공기업</option>
+          <option>사기업</option>
+          <option>자영업</option>
+          <option>학생</option>
+          </select>
+        </li>
+        <li>
           <label>
-            <input type="checkbox" class="tasks" value="task1" />
-            가족 중에 뇌 질환 관련 질명을 앓고 있는 사람이 있었다.
+            <input type="checkbox" class="task" value="pressure" />
+            고혈압이십니까?
           </label>
         </li>
         <li>
           <label>
-            <input type="checkbox" class="tasks" value="task2" />
-            최근 어지러움을 자주 느낀다.
+            <input type="checkbox" class="task" value="heart" />
+            최근 심장 질환을 겪은 적이 있습니까?
           </label>
         </li>
         <li>
           <label>
-            <input type="checkbox" class="tasks" value="task3" />
-            자고 일어났을 때 눈을 뜨면 헛구역질을 한다.
+            <input type="checkbox" class="task" value="marry" />
+            결혼하셨습니까?
           </label>
         </li>
-        <li>
-          <label>
-            <input type="checkbox" class="tasks" value="task4" />
-            병원 정기검진 결과 혈당 수치가 높게 나왔다.
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox" class="tasks" value="task4" />
-            과도한 업무 스트레스에 시달리고 있다.
-          </label>
-        </li>
-        <li>
-          <label>
-            <input type="checkbox" class="tasks" value="task4" />
-            최근 들어 부쩍 사람 이름이나 장소 등을 잊어버린다.
-          </label>
+        <li><p>담배를 피십니까?</p>
+        <select class="select2" id="smoke">
+          <option>모른다</option>
+          <option>가끔 핀다</option>
+          <option>한번도 피운적 없다</option>
+          <option>흡연</option>
+        </select>
         </li>
       </ul>
       <button type="submit">제출</button>
@@ -55,22 +54,44 @@ export default class Checklist extends Component {
     const inputEl = this.el.querySelector("button")
     inputEl.addEventListener("click", (e) => {
       e.preventDefault()
+      var value1 = document.getElementById("gender").selectedIndex
+      var value2 = document.getElementById("job").selectedIndex
+      var value3 = document.getElementById("smoke").selectedIndex
+
       const formData = {
-        name: "",
-        age: "",
-        gender: "",
-        symptoms: [],
+        gender: value1,
+
+        age: parseInt(this.el.querySelector('input[type="text"][placeholder="나이"]').value),
+
+        hypertension: this.el.querySelector('input[value="pressure"]').checked ? 1 : 0,
+
+        heartdisease: this.el.querySelector('input[value="heart"]').checked ? 1 : 0,
+
+        evermarried: this.el.querySelector('input[value="marry"]').checked ? 1 : 0,
+
+        worktype: value2,
+
+        bmi: parseFloat(this.el.querySelector('input[type="text"][placeholder="BMI"]').value),
+
+        smokingstatus: value3,
       }
-      formData.name = this.el.querySelector('input[type="text"][placeholder="이름"]').value
-      formData.age = this.el.querySelector('input[type="text"][placeholder="나이"]').value
-      formData.gender = this.el.querySelector(".select").value
-      const checkedSymptoms = this.el.querySelectorAll('input[type="checkbox"]:checked')
-      checkedSymptoms.forEach((checkbox) => {
-        formData.symptoms.push(checkbox.value)
-      })
+
       const jsonFormData = JSON.stringify(formData)
       console.log(jsonFormData)
       localStorage.setItem("formData", JSON.stringify(formData))
+
+      fetch("http://localhost:1234/api/SurveyStroke", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: jsonFormData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("Data posted to server:", data)
+        })
+        .catch((error) => console.error("Error posting data:", error))
 
       window.location.hash = "#result"
     })
