@@ -42,7 +42,9 @@ clf = LazyClassifier(verbose=0, ignore_warnings=True, custom_metric=None)
 models, predictions = clf.fit(x_train, x_test, y_train, y_test)
 print(models)
 
+
 from sklearn.ensemble import RandomForestClassifier
+'''
 rf = RandomForestClassifier()
 rf.fit(x_train, y_train)
 
@@ -58,39 +60,32 @@ cm = confusion_matrix(y_test, y_pred)
 disp = ConfusionMatrixDisplay(confusion_matrix=cm)
 disp.plot()
 plt.show()
+'''
+
+from sklearn.metrics import accuracy_score, confusion_matrix, ConfusionMatrixDisplay
+
+# RandomForest 모델을 학습시킵니다.
+rf = RandomForestClassifier()
+rf.fit(x_train, y_train)
+
+# 예측 확률을 계산합니다.
+y_pred_proba = rf.predict_proba(x_test)[:, 1]  # 뇌졸중 클래스('1')에 대한 확률 추출
+print("Predicted probabilities for having a stroke:", y_pred_proba)
+
+# 임계값 설정을 기반으로 예측 결과를 계산합니다 (예: 확률 > 0.5면 뇌졸중으로 예측)
+threshold = 0.5
+y_pred = (y_pred_proba >= threshold).astype(int)
+
+# 정확도 계산
+accuracy = accuracy_score(y_test, y_pred)
+print("Accuracy:", accuracy)
 
 '''
-#인코딩된 데이터 확인용
-from sklearn.preprocessing import LabelEncoder
-
-# 예시 데이터
-data = {
-    'residence_type': ['Urban', 'Rural', 'Urban', 'Rural'],
-    'gender' : ['Male', 'Female', 'Male', 'Female'],
-    'work_type' : ['Private', 'Govt_job', 'Self_employed', 'children'],
-    'smoking_status' : ['smokes', 'never smoked', 'formerly smoked', 'Unknown']
-}
-
-df = pd.DataFrame(data)
-
-# LabelEncoder 객체 생성 및 학습
-encoder = LabelEncoder()
-df['residence_type_encoded'] = encoder.fit_transform(df['residence_type'])
-df['gender_encoded'] = encoder.fit_transform(df['gender'])
-df['work_type_encoded'] = encoder.fit_transform(df['work_type'])
-df['smoking_status_encoded'] = encoder.fit_transform(df['smoking_status'])
-
-# 인코딩 결과 확인
-print(df)
-
-# 범주가 어떻게 인코딩되었는지 확인
-classes = encoder.classes_
-print("Classes:", classes)
-
-# "Urban"이 인코딩된 값 찾기
-urban_index = encoder.transform(['Urban'])[0]
-gender_index = encoder.transform(['Male'])[0]
-#work_index = encoder.transform([''])
+# 혼동 행렬 시각화
+cm = confusion_matrix(y_test, y_pred)
+disp = ConfusionMatrixDisplay(confusion_matrix=cm)
+disp.plot()
+plt.show()
 '''
 
 # 모델 저장
