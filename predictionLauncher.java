@@ -13,8 +13,21 @@ public class StrokePredictionClient {
             HttpPost request = new HttpPost("http://localhost:5000/predict");
 
             //api에 넘겨줄 정보 userinfo 가져와서 넣으면 됨.
-            String json = "{\"gender\": \"Male\", \"smoking_status\": \"formerly smoked\", ...}";
-            StringEntity entity = new StringEntity(json);
+            //입력 순서: ["gender", "age", "hypertension", "heart_disease", "ever_married", "work_type", "residence_type", 
+            //"avg_glucose_level", "bmi", "smoking_status"]
+            String json = "{"
+                        + "\"gender\": 1,"              // 0 : Female | 1 : Male
+                        + "\"age\": 65,"    
+                        + "\"hypertension\": 1,"
+                        + "\"heart_disease\": 1,"
+                        + "\"ever_married\": 1,"        // 1: Yes | 0: NO
+                        + "\"work_type\": 2,"           // 0 : Govt_job | 1: Private | 2: Self_employed | 3: Children
+                        + "\"residence_type\": 1,"      // 0: Rural | 1: Urban
+                        + "\"avg_glucose_level\": 86.4,"
+                        + "\"bmi\": 38.1,"
+                        + "\"smoking_status\": 3"       // 0: Unknown | 1: fomerly smoked | 2: never smoked | 3: smokes
+                        + "}";
+            StringEntity entity = new StringEntity(json, "UTF-8");
             request.setEntity(entity);
             request.setHeader("Accept", "application/json");
             request.setHeader("Content-type", "application/json");
