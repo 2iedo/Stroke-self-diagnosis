@@ -15,6 +15,7 @@ public class SurveyStroke {
     @PostMapping
     public void startSurvey(@RequestBody UserInfo data) {
         // Gson 인스턴스 생성
+        System.out.println(data);
         Gson gson = new Gson();
 
         // 자바 객체를 JSON 문자열로 변환

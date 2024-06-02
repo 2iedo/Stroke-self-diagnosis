@@ -99,6 +99,7 @@ export default class Checklist extends Component {
           console.log("Data posted to server:", data)
         })
         .catch((error) => console.error("Error posting data:", error))
+      console.log("hello")
 
       window.location.hash = "#result"
     })
