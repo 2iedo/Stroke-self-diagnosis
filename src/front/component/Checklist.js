@@ -80,18 +80,18 @@ export default class Checklist extends Component {
       console.log(jsonFormData)
       localStorage.setItem("formData", JSON.stringify(formData))
 
-      fetch("http://localhost:1234/api/SurveyStroke", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: jsonFormData,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("Data posted to server:", data)
-        })
-        .catch((error) => console.error("Error posting data:", error))
+      // fetch("http://localhost:1234/api/SurveyStroke", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: jsonFormData,
+      // })
+      //   .then((response) => response.json())
+      //   .then((data) => {
+      //     console.log("Data posted to server:", data)
+      //   })
+      //   .catch((error) => console.error("Error posting data:", error))
 
       window.location.hash = "#result"
     })
