@@ -1,4 +1,5 @@
 //건들지 마쇼
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -17,6 +18,7 @@ public class StrokePredictionClient {
             //api에 넘겨줄 정보, userinfo를 가공해서 넣어야 함.
             //입력 순서: ["gender", "age", "hypertension", "heart_disease", "ever_married", "work_type", "residence_type", 
             //"avg_glucose_level", "bmi", "smoking_status"]
+            
             String json = "{"
                         + "\"gender\": 1,"              // 0 : Female | 1 : Male
                         + "\"age\": 65,"    
