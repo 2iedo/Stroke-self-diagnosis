@@ -14,6 +14,8 @@ public class UserInfo {
     private int smokingStatus;
     private int strokePercent;
 
+    public UserInfo() {}
+
     public UserInfo(int gender, int age, int hypertension, int heartdisease, int everMarried,
         int workType, double bmi, int smokingStatus, int strokePercent) {
         this.gender = gender;
