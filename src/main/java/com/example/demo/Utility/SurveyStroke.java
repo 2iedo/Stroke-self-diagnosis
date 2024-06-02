@@ -2,6 +2,10 @@ package com.example.demo.Utility;
 
 import com.example.demo.DTO.UserInfo;
 import org.springframework.web.bind.annotation.*;
+import com.google.gson.Gson;
+
+import java.io.FileWriter;
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/SurveyStroke")
@@ -11,35 +15,17 @@ public class SurveyStroke {
     @CrossOrigin(origins = "http://localhost:1234")
     @PostMapping
     public void startSurvey(@RequestBody UserInfo data) {
-        System.out.println(data);
-    }
+        // Gson 인스턴스 생성
+        Gson gson = new Gson();
 
-    public void updateUserLabel(int score, String label) {
-        switch (label) {
-            case "gender":
-                userInfo.setGender(score);
-                break;
-            case "age":
-                userInfo.setAge(score);
-                break;
-            case "hypertension":
-                userInfo.setHypertension(score);
-                break;
-            case "heartdisease":
-                userInfo.setHeartdisease(score);
-                break;
-            case "everMarried":
-                userInfo.setEverMarried(score);
-                break;
-            case "workType":
-                userInfo.setWorkType(score);
-                break;
-            case "bmi":
-                userInfo.setBmi((double) score);
-                break;
-            case "smokingStatus":
-                userInfo.setSmokingStatus(score);
-                break;
+        // 자바 객체를 JSON 문자열로 변환
+        String jsonString = gson.toJson(userInfo);
+
+        // 자바 객체를 JSON 파일로 변환
+        try (FileWriter writer = new FileWriter("Repository/userInfo.json")) {
+            gson.toJson(userInfo, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
