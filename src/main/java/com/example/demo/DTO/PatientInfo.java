@@ -11,8 +11,7 @@ public class PatientInfo extends UserInfo{
         int workType, double bmi, int smokingStatus, int strokePercent, String name,
         String birthday,
         String address, String phone, String anamnesis) {
-        super(gender, age, hypertension, heartdisease, everMarried, workType, bmi, smokingStatus,
-            strokePercent);
+        super(gender, age, hypertension, heartdisease, everMarried, workType, bmi, smokingStatus);
         this.name = name;
         this.birthday = birthday;
         this.address = address;
