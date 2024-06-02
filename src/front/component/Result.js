@@ -13,5 +13,25 @@ export default class Result extends Component {
       <button type="button" class="reserve" onclick="window.location.hash = '#hospital'">병원 예약</button>
       </div>
     `
+    console.log("heo")
+
+    fetch("http://localhost:8080/api/DecisionStroke", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Origin: "http://localhost:1234",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok")
+        }
+        return response.json()
+      })
+      .then((data) => {
+        const receivedData = data
+        console.log(receivedData)
+      })
+      .catch((error) => console.error("Error fetching data:", error))
   }
 }
