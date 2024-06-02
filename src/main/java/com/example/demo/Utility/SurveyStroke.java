@@ -2,7 +2,6 @@ package com.example.demo.Utility;
 
 import com.example.demo.DTO.UserInfo;
 import org.springframework.web.bind.annotation.*;
-import jakarta.persistence.Entity;
 
 @RestController
 @RequestMapping("/api/SurveyStroke")
@@ -14,8 +13,8 @@ public class SurveyStroke {
         userInfo = data;
     }
 
-    public void updateUserLabel(int score, String label){
-        switch (label){
+    public void updateUserLabel(int score, String label) {
+        switch (label) {
             case "gender":
                 userInfo.setGender(score);
                 break;
@@ -35,7 +34,7 @@ public class SurveyStroke {
                 userInfo.setWorkType(score);
                 break;
             case "bmi":
-                userInfo.setBmi((double)score);
+                userInfo.setBmi((double) score);
                 break;
             case "smokingStatus":
                 userInfo.setSmokingStatus(score);

@@ -1,5 +1,6 @@
 package com.example.demo.DTO;
 
+
 public class UserInfo {
     private int gender;
     private int age;
