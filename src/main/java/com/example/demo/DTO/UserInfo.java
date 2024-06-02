@@ -11,10 +11,10 @@ public class UserInfo {
     private double avgGlucoseLevel = 106.14;
     private double bmi;
     private int smokingStatus;
-    private int strokePercent;
+    private double strokePercent;
 
     public UserInfo(int gender, int age, int hypertension, int heartdisease, int everMarried,
-        int workType, double bmi, int smokingStatus, int strokePercent) {
+        int workType, double bmi, int smokingStatus) {
         this.gender = gender;
         this.age = age;
         this.hypertension = hypertension;
@@ -23,7 +23,6 @@ public class UserInfo {
         this.workType = workType;
         this.bmi = bmi;
         this.smokingStatus = smokingStatus;
-        this.strokePercent = strokePercent;
     }
 
     public int getGender() {
@@ -90,11 +89,27 @@ public class UserInfo {
         this.smokingStatus = smokingStatus;
     }
 
-    public int getStrokePercent() {
+    public double getStrokePercent() {
         return strokePercent;
     }
 
-    public void setStrokePercent(int strokePercent) {
+    public void setStrokePercent(double strokePercent) {
         this.strokePercent = strokePercent;
+    }
+
+    public int getResidenceType() {
+        return residenceType;
+    }
+
+    public void setResidenceType(int residenceType) {
+        this.residenceType = residenceType;
+    }
+
+    public double getAvgGlucoseLevel() {
+        return avgGlucoseLevel;
+    }
+
+    public void setAvgGlucoseLevel(double avgGlucoseLevel) {
+        this.avgGlucoseLevel = avgGlucoseLevel;
     }
 }
