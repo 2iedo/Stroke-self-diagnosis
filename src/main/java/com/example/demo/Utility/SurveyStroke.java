@@ -5,12 +5,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/SurveyStroke")
+
 public class SurveyStroke {
     private UserInfo userInfo;
-
+    @CrossOrigin(origins = "http://localhost:1234")
     @PostMapping
     public void startSurvey(@RequestBody UserInfo data) {
-        userInfo = data;
+        System.out.println(data);
     }
 
     public void updateUserLabel(int score, String label) {

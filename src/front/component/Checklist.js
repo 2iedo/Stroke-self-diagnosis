@@ -67,31 +67,38 @@ export default class Checklist extends Component {
 
         heartdisease: this.el.querySelector('input[value="heart"]').checked ? 1 : 0,
 
-        evermarried: this.el.querySelector('input[value="marry"]').checked ? 1 : 0,
+        everMarried: this.el.querySelector('input[value="marry"]').checked ? 1 : 0,
 
-        worktype: value2,
+        workType: value2,
 
         bmi: parseFloat(this.el.querySelector('input[type="text"][placeholder="BMI"]').value),
 
-        smokingstatus: value3,
+        smokingStatus: value3,
+
+        strokePercent: null,
       }
 
       const jsonFormData = JSON.stringify(formData)
       console.log(jsonFormData)
       localStorage.setItem("formData", JSON.stringify(formData))
 
-      // fetch("http://localhost:1234/api/SurveyStroke", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: jsonFormData,
-      // })
-      //   .then((response) => response.json())
-      //   .then((data) => {
-      //     console.log("Data posted to server:", data)
-      //   })
-      //   .catch((error) => console.error("Error posting data:", error))
+      fetch("http://localhost:8080/api/SurveyStroke", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: jsonFormData,
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok")
+          }
+          return response.json()
+        })
+        .then((data) => {
+          console.log("Data posted to server:", data)
+        })
+        .catch((error) => console.error("Error posting data:", error))
 
       window.location.hash = "#result"
     })
