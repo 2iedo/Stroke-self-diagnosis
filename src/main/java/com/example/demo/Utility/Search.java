@@ -103,6 +103,7 @@ public class Search {
                 String hospitalOpening = document.getElementsByTagName("dutyTime1s").item(i).getTextContent();
                 String hospitalClosing = document.getElementsByTagName("dutyTime1c").item(i).getTextContent();
 
+                if(list.size() >= 3) break;
                 list.add(new HospitalInfo(address, hospitalName, hospitalOpening, hospitalClosing));
             }
             return list;
