@@ -1,4 +1,5 @@
 //건들지 마쇼
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -15,20 +16,20 @@ public class StrokePredictionClient {
             HttpPost request = new HttpPost("http://localhost:5000/predict");
 
             //api에 넘겨줄 정보, userinfo를 가공해서 넣어야 함.
-            //입력 순서: ["gender", "age", "hypertension", "heart_disease", "ever_married", "work_type", "residence_type", 
+            //입력 순서: ["gender", "age", "hypertension", "heart_disease", "ever_married", "work_type", "residence_type",
             //"avg_glucose_level", "bmi", "smoking_status"]
             String json = "{"
-                        + "\"gender\": 1,"              // 0 : Female | 1 : Male
-                        + "\"age\": 65,"    
-                        + "\"hypertension\": 1,"
-                        + "\"heart_disease\": 1,"
-                        + "\"ever_married\": 1,"        // 1: Yes | 0: NO
-                        + "\"work_type\": 2,"           // 0 : Govt_job | 1: Private | 2: Self_employed | 3: Children
-                        + "\"residence_type\": 1,"      // 0: Rural | 1: Urban
-                        + "\"avg_glucose_level\": 86.4,"
-                        + "\"bmi\": 38.1,"
-                        + "\"smoking_status\": 3"       // 0: Unknown | 1: fomerly smoked | 2: never smoked | 3: smokes
-                        + "}";
+                    + "\"gender\": 1,"              // 0 : Female | 1 : Male
+                    + "\"age\": 65,"
+                    + "\"hypertension\": 1,"
+                    + "\"heart_disease\": 1,"
+                    + "\"ever_married\": 1,"        // 1: Yes | 0: NO
+                    + "\"work_type\": 2,"           // 0 : Govt_job | 1: Private | 2: Self_employed | 3: Children
+                    + "\"residence_type\": 1,"      // 0: Rural | 1: Urban
+                    + "\"avg_glucose_level\": 86.4,"
+                    + "\"bmi\": 38.1,"
+                    + "\"smoking_status\": 3"       // 0: Unknown | 1: fomerly smoked | 2: never smoked | 3: smokes
+                    + "}";
             StringEntity entity = new StringEntity(json, "UTF-8");
             request.setEntity(entity);
             request.setHeader("Accept", "application/json");
