@@ -15,6 +15,10 @@ body {
   position: relative;
 }
 
+li {
+  margin-top: 10px;
+}
+
 .select {
   width: 200px;
   height: 44px;
@@ -48,20 +52,50 @@ button {
   background-color: #4caf50;
   color: white;
   cursor: pointer;
-  position: absolute;
-  left: 48%;
+  margin: 10px auto;
+  display: block;
+  width: 150px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.Result.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  width: 50%;
 }
 
 button.reset {
-  margin-top: 20px;
-  left: 42%;
+  background-color: #f44336;
 }
 
 button.reserve {
-  margin-top: 20px;
-  left: 51%;
+  background-color: #2196f3;
 }
 
 button.come {
-  margin-top: 100px;
+  background-color: #ffeb3b;
+  color: black;
+}
+
+.reservation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.form-list li {
+  list-style-type: none;
+  margin-bottom: 10px;
+}
+.form-list span {
+  display: inline-block;
+  width: 100px;
+}
+.form-list input {
+  width: 200px;
 }

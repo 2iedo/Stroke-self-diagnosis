@@ -21,6 +21,14 @@ export default class Checklist extends Component {
           <option>학생</option>
           </select>
         </li>
+        <li><span>담배를 피십니까?</span>
+        <select class="select2" id="smoke">
+          <option>모른다</option>
+          <option>가끔 핀다</option>
+          <option>한번도 피운적 없다</option>
+          <option>흡연</option>
+        </select>
+        </li>
         <li>
           <label>
             <input type="checkbox" class="task" value="pressure" />
@@ -38,14 +46,6 @@ export default class Checklist extends Component {
             <input type="checkbox" class="task" value="marry" />
             결혼하셨습니까?
           </label>
-        </li>
-        <li><p>담배를 피십니까?</p>
-        <select class="select2" id="smoke">
-          <option>모른다</option>
-          <option>가끔 핀다</option>
-          <option>한번도 피운적 없다</option>
-          <option>흡연</option>
-        </select>
         </li>
       </ul>
       <button type="submit">제출</button>
@@ -99,6 +99,7 @@ export default class Checklist extends Component {
           console.log("Data posted to server:", data)
         })
         .catch((error) => console.error("Error posting data:", error))
+      console.log("hello")
 
       window.location.hash = "#result"
     })

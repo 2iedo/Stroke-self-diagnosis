@@ -1,6 +1,7 @@
 import Checklist from "./component/Checklist"
 import Result from "./component/Result"
 import Come from "./component/Come"
+import Reserve from "./component/Reserve"
 
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.querySelector(".root")
@@ -32,6 +33,13 @@ document.addEventListener("DOMContentLoaded", () => {
           const hospital = new Come()
           hospital.render()
           root.appendChild(hospital.el)
+        }
+        break
+      case "#reserve":
+        {
+          const reserve = new Reserve()
+          reserve.render()
+          root.appendChild(reserve.el)
         }
         break
 
