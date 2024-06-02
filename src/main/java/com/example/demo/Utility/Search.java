@@ -1,36 +1,36 @@
 package com.example.demo.Utility;
 
 import com.example.demo.DTO.HospitalInfo;
-
-import java.io.*;
-import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import org.json.JSONObject;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import org.json.JSONObject;
 
+@RestController
+@RequestMapping("/api/Search")
 public class Search {
     private HospitalInfo hospitalInfo;
 
-    public HospitalInfo startSearch() throws IOException{
+    @CrossOrigin(origins = "http://localhost:1234")
+    @GetMapping("/hospitalList")
+    public ArrayList<HospitalInfo> startSearch() throws IOException{
         // 병원 리스트를 가져오기
         ArrayList<HospitalInfo> list = getHospitalList();
-
-        hospitalInfo = null;
-
-        //프론트에서 받는 동안 기다림
-        while(hospitalInfo == null){
-            hospitalInfo = getHospitalInfo();
-        }
-
-        return hospitalInfo;
+        return list;
     }
 
     //선택한 병원 정보를 리턴하는 함수
