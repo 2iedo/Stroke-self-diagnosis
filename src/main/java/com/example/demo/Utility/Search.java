@@ -90,8 +90,9 @@ public class Search {
                 String address = document.getElementsByTagName("dutyAddr").item(i).getTextContent();
                 String hospitalName = document.getElementsByTagName("dutyName").item(i).getTextContent();
                 String hospitalOpening = document.getElementsByTagName("dutyTime1s").item(i).getTextContent();
+                hospitalOpening = hospitalOpening.substring(0,2) + ":" + hospitalOpening.substring(2);
                 String hospitalClosing = document.getElementsByTagName("dutyTime1c").item(i).getTextContent();
-
+                hospitalClosing = hospitalClosing.substring(0,2) + ":" + hospitalClosing.substring(2);
                 if(list.size() >= 3) break;
                 list.add(new HospitalInfo(address, hospitalName, hospitalOpening, hospitalClosing));
             }
