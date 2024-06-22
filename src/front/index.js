@@ -17,28 +17,24 @@ document.addEventListener("DOMContentLoaded", () => {
       case "#":
         {
           const checklist = new Checklist()
-          checklist.render()
           root.appendChild(checklist.el)
         }
         break
       case "#result":
         {
           const result = new Result()
-          result.render()
           root.appendChild(result.el)
         }
         break
       case "#hospital":
         {
           const hospital = new Come()
-          hospital.render()
           root.appendChild(hospital.el)
         }
         break
       case "#reserve":
         {
           const reserve = new Reserve()
-          reserve.render()
           root.appendChild(reserve.el)
         }
         break
