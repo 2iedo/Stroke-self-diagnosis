@@ -33,12 +33,7 @@ public class Search {
         return list;
     }
 
-    //선택한 병원 정보를 리턴하는 함수
-    public HospitalInfo getHospitalInfo(){
-        HospitalInfo res = null;
 
-        return res;
-    }
 
     //병원의 정보 리스트를 받는 함수
     public ArrayList<HospitalInfo> getHospitalList() throws IOException{
