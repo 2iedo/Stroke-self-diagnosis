@@ -1,17 +1,15 @@
 import Checklist from "./component/Checklist"
 import Result from "./component/Result"
-import Come from "./component/Come"
+import Come from "./component/Hospital"
 import Reserve from "./component/Reserve"
 
 document.addEventListener("DOMContentLoaded", () => {
   const root = document.querySelector(".root")
 
   function render() {
-    const hash = window.location.hash.trim() // 해시 값의 공백 제거
-    root.innerHTML = "" // Clear the root element
-
-    console.log("Current hash:", hash) // 해시 값을 콘솔에 출력하여 디버깅
-
+    const hash = window.location.hash.trim()
+    root.innerHTML = ""
+    console.log("Current hash:", hash)
     switch (hash) {
       case "":
       case "#":
@@ -38,12 +36,10 @@ document.addEventListener("DOMContentLoaded", () => {
           root.appendChild(reserve.el)
         }
         break
-
       default:
         root.innerHTML = "<p>The requested page could not be found.</p>"
     }
   }
-
   window.addEventListener("hashchange", render)
   render()
 })

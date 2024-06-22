@@ -50,58 +50,55 @@ export default class Checklist extends Component {
       </ul>
       <button type="submit">제출</button>
     `
-
+    const ageInput = this.el.querySelector('input[type="text"][placeholder="나이"]')
+    const bmiInput = this.el.querySelector('input[type="text"][placeholder="BMI"]')
     const inputEl = this.el.querySelector("button")
+
     inputEl.addEventListener("click", (e) => {
-      e.preventDefault()
-      var value1 = document.getElementById("gender").selectedIndex
-      var value2 = document.getElementById("job").selectedIndex
-      var value3 = document.getElementById("smoke").selectedIndex
+      if (!ageInput.value || !bmiInput.value) {
+        alert("⚠️모든 항목을 모두 입력해주세요.")
+        return
+      } else {
+        e.preventDefault()
+        var value1 = document.getElementById("gender").selectedIndex
+        var value2 = document.getElementById("job").selectedIndex
+        var value3 = document.getElementById("smoke").selectedIndex
 
-      const formData = {
-        gender: value1,
+        const formData = {
+          gender: value1,
+          age: parseInt(this.el.querySelector('input[type="text"][placeholder="나이"]').value),
+          hypertension: this.el.querySelector('input[value="pressure"]').checked ? 1 : 0,
+          heartdisease: this.el.querySelector('input[value="heart"]').checked ? 1 : 0,
+          everMarried: this.el.querySelector('input[value="marry"]').checked ? 1 : 0,
+          workType: value2,
+          bmi: parseFloat(this.el.querySelector('input[type="text"][placeholder="BMI"]').value),
+          smokingStatus: value3,
+          strokePercent: null,
+        }
+        const jsonFormData = JSON.stringify(formData)
+        console.log(jsonFormData)
+        localStorage.setItem("formData", JSON.stringify(formData))
 
-        age: parseInt(this.el.querySelector('input[type="text"][placeholder="나이"]').value),
-
-        hypertension: this.el.querySelector('input[value="pressure"]').checked ? 1 : 0,
-
-        heartdisease: this.el.querySelector('input[value="heart"]').checked ? 1 : 0,
-
-        everMarried: this.el.querySelector('input[value="marry"]').checked ? 1 : 0,
-
-        workType: value2,
-
-        bmi: parseFloat(this.el.querySelector('input[type="text"][placeholder="BMI"]').value),
-
-        smokingStatus: value3,
-
-        strokePercent: null,
+        fetch("http://localhost:8080/api/SurveyStroke", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: jsonFormData,
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok")
+            }
+            return response.json()
+          })
+          .then((data) => {
+            console.log("Data posted to server:", data)
+          })
+          .catch((error) => console.error("Error posting data:", error))
+        console.log("hello")
+        window.location.hash = "#result"
       }
-
-      const jsonFormData = JSON.stringify(formData)
-      console.log(jsonFormData)
-      localStorage.setItem("formData", JSON.stringify(formData))
-
-      fetch("http://localhost:8080/api/SurveyStroke", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: jsonFormData,
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Network response was not ok")
-          }
-          return response.json()
-        })
-        .then((data) => {
-          console.log("Data posted to server:", data)
-        })
-        .catch((error) => console.error("Error posting data:", error))
-      console.log("hello")
-
-      window.location.hash = "#result"
     })
   }
 }
