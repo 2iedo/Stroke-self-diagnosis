@@ -33,8 +33,6 @@ public class Search {
         return list;
     }
 
-
-
     //병원의 정보 리스트를 받는 함수
     public ArrayList<HospitalInfo> getHospitalList() throws IOException{
         try{
