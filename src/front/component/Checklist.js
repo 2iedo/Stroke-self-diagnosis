@@ -12,7 +12,7 @@ export default class Checklist extends Component {
     </select>
     
     <h2>✅ 자신에게 해당되는 증상을 체크해 주세요</h2>
-      <ul>
+      <ul >
         <li>
           <select class="select1" id="job">
           <option>공기업</option>
