@@ -1,6 +1,15 @@
 header {
   font-family: Arial, sans-serif;
   font-size: 100px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.header-image {
+  width: 250px;
+  height: auto;
+  margin-bottom: -50px;
 }
 
 body {
@@ -13,6 +22,7 @@ body {
   justify-content: center;
   align-items: center;
   position: relative;
+  color: #333;
 }
 
 li {
@@ -23,26 +33,24 @@ li {
   width: 200px;
   height: 44px;
   border-radius: 10px;
-  background-color: white;
+  background-color: #fff;
   padding: 10px;
   position: relative;
   margin-top: 20px;
-  border: 1px solid grey;
+  border: 1px solid #808080;
   margin-bottom: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .textBox {
-  width: 50px;
-  height: 0px;
-  background-color: white;
+  width: 200px;
+  background-color: #fff;
   border-radius: 10px;
-  padding: 20px;
+  padding: 10px;
   position: relative;
-  border: 1px solid grey;
-}
-
-.tasks {
-  margin-top: 20px;
+  border: 1px solid #808080;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 button {
@@ -50,7 +58,7 @@ button {
   border: none;
   border-radius: 5px;
   background-color: #4caf50;
-  color: white;
+  color: #fff;
   cursor: pointer;
   margin: 10px auto;
   display: block;
@@ -58,27 +66,37 @@ button {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  text-align: center;
+  transition: background-color 0.3s;
 }
 
-.Result.button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  width: 50%;
+button:hover {
+  background-color: #45a049;
 }
 
 button.reset {
   background-color: #f44336;
 }
 
+button.reset:hover {
+  background-color: #e53935;
+}
+
 button.reserve {
   background-color: #2196f3;
+}
+
+button.reserve:hover {
+  background-color: #1e88e5;
 }
 
 button.come {
   background-color: #ffeb3b;
   color: black;
+}
+
+button.come:hover {
+  background-color: #fdd835;
 }
 
 .reservation {
@@ -88,14 +106,47 @@ button.come {
   flex-direction: column;
 }
 
-.form-list li {
+.form-list {
+  padding: 0;
+  margin: 0;
   list-style-type: none;
+}
+
+.form-list li {
   margin-bottom: 10px;
 }
+
 .form-list span {
   display: inline-block;
   width: 100px;
 }
+
 .form-list input {
   width: 200px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.spinner {
+  display: none;
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #4caf50;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 1s linear infinite;
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
